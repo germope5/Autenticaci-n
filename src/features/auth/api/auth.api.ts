@@ -4,6 +4,7 @@
 //Antes de comenzar con el desarrollo, hay que definir el cliente
 //HTTP y la configuración base.
 import axios from 'axios';
+import { LoginCredentials, AuthResponse } from '../types';
 
 // Usamos variables de entorno de Vite (import.meta.env) si existen, sino un valor por defecto.
 export const API_URL = import.meta.env?.VITE_API_URL || 'http://localhost:3000/api';
@@ -20,7 +21,7 @@ export const authClient = axios.create({
 
 //Vamos a comenzar con la Capa de Datos
 //Función del Login
-export const Login = async (credentials: LoginCredentials) => {
+export const login = async (credentials: LoginCredentials) => {
     try {
         const response = await authClient.post<AuthResponse>('/auth/login', credentials);
         return response.data;
