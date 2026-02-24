@@ -4,7 +4,7 @@
 //Antes de comenzar con el desarrollo, hay que definir el cliente
 //HTTP y la configuración base.
 import axios from 'axios';
-import { LoginCredentials, AuthResponse } from '../types';
+import { LoginCredentials, AuthResponse, RegisterCredentials } from '../types';
 
 // Usamos variables de entorno de Vite (import.meta.env) si existen, sino un valor por defecto.
 export const API_URL = import.meta.env?.VITE_API_URL || 'http://localhost:3000/api';
@@ -31,4 +31,15 @@ export const login = async (credentials: LoginCredentials) => {
         throw error;
     }
     
+}
+
+//Función para el Registro
+export const register = async (userData: RegisterCredentials) => {
+    try {
+        const response = await authClient.post<AuthResponse>('/auth/register', userData);
+        return response.data;
+    } catch(error) {
+        console.error("Error en el Registro:", error);
+        throw error;
+    }
 }
