@@ -17,3 +17,17 @@ export const authClient = axios.create({
   // withCredentials: true es CRUCIAL para enviar cookies HttpOnly (como el refresh token)
   withCredentials: true, 
 });
+
+//Vamos a comenzar con la Capa de Datos
+//Función del Login
+export const Login = async (credentials: LoginCredentials) => {
+    try {
+        const response = await authClient.post<AuthResponse>('/auth/login', credentials);
+        return response.data;
+
+    } catch (error) {
+        console.error("Error en el Login: ", error);
+        throw error;
+    }
+    
+}
